@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>ToDo List</h1>
+    <ul>
+        {% for task in tasks %}
+        <li>{{ task }}</li>
+        <form action="/complete_task" method="post">
+            <input type="hidden" name="task_index" value="{{ loop.index0 }}">
+            <button type="submit">Complete</button>
+        </form>
+        <form action="/delete_task" method="post">
+            <input type="hidden" name="task_index" value="{{ loop.index0 }}">
+            <button type="submit">Delete</button>
+        </form>
+        {% endfor %}
+    </ul>
+    <form action="/add_task" method="post">
+        <input type="text" name="task" placeholder="Add a new task...">
+        <button type="submit">Add</button>
+    </form>
+</body>
+
+</html>
